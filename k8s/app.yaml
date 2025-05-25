@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sword-challenge
+  template:
+    metadata:
+      labels:
+        app: sword-challenge
+    spec:
+      containers:
+      - name: app
+        image: sword-challenge:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: app-config
+        readinessProbe:
+          httpGet:
+            path: /api/tasks
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /api/tasks
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  selector:
+    app: sword-challenge
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: LoadBalancer 
