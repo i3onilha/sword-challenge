@@ -1,0 +1,11 @@
+test/*.html
+test/*.out
+build/bin
+node_modules
+frontend/dist
+.env
+*.txt
+databases/sql/backup/*.sql
+test/server
+tmp/main
+tmp/*.log

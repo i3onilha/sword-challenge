@@ -1,0 +1,19 @@
+# Server configuration
+PORT=3000
+
+# Database configuration
+DB_DRIVER=mysql
+DB_HOST=mysql-service
+DB_PORT=3306
+DB_NAME=dbdev        # This matches MYSQL_DATABASE in docker-compose
+DB_USER=default       # This matches MYSQL_USER in docker-compose
+DB_PASSWORD=secret  # This matches MYSQL_PASSWORD in docker-compose
+MYSQL_ROOT_PASSWORD=root
+
+# JWT configuration
+JWT_SECRET=your_secure_jwt_secret_at_least_32_chars
+
+# RabbitMQ configuration
+RABBITMQ_USER=guest      # This matches RABBITMQ_DEFAULT_USER in docker-compose
+RABBITMQ_PASSWORD=guest  # This matches RABBITMQ_DEFAULT_PASS in docker-compose
+RABBITMQ_URL=amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@rabbitmq:5672/

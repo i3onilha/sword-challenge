@@ -1,0 +1,16 @@
+version: 2
+sql:
+  - engine: "mysql"
+    schema: "databases/sql/mysql/schema/tasks"
+    queries: "databases/sql/mysql/queries/tasks"
+    gen:
+      go:
+        package: "tasks"
+        out: "internal/repository/mysql/tasks"
+  - engine: "mysql"
+    schema: "databases/sql/mysql/schema/notifications"
+    queries: "databases/sql/mysql/queries/notifications"
+    gen:
+      go:
+        package: "notifications"
+        out: "internal/repository/mysql/notifications"
