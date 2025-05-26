@@ -27,7 +27,7 @@ A RESTful API for managing maintenance tasks performed by technicians, with mana
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/i3onilha/sword-challenge 
+git clone https://github.com/i3onilha/sword-challenge
 cd sword-challenge
 ```
 
@@ -42,7 +42,7 @@ cp env-example .env
 
 3. Start the development environment:
 ```bash
-docker-compose up -d
+docker-compose up -d app-dev
 ```
 
 4. Get into container development:
@@ -170,8 +170,7 @@ go tool cover -html=coverage.out
 - Add rate limiting
 - Add request logging
 - Add more comprehensive test coverage
-- Add Kubernetes deployment files
 - Implement user management endpoints
 - Add pagination for task and notification lists
 - Add filtering and sorting options
-- Implement WebSocket for real-time notifications 
+- Implement WebSocket for real-time notifications
