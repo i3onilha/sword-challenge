@@ -45,7 +45,7 @@ type UpdateTaskRequest struct {
 // @Failure      403  {object}  map[string]string
 // @Failure      500  {object}  map[string]string
 // @Security     BearerAuth
-// @Router       /tasks [post]
+// @Router       /api/tasks [post]
 func (h *TaskController) CreateTask(c *gin.Context) {
 	var req CreateTaskRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -94,7 +94,7 @@ func (h *TaskController) CreateTask(c *gin.Context) {
 // @Failure      404  {object}  map[string]string
 // @Failure      500  {object}  map[string]string
 // @Security     BearerAuth
-// @Router       /tasks/{id} [get]
+// @Router       /api/tasks/{id} [get]
 func (h *TaskController) GetTask(c *gin.Context) {
 	taskID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
@@ -129,7 +129,7 @@ func (h *TaskController) GetTask(c *gin.Context) {
 // @Failure      404  {object}  map[string]string
 // @Failure      500  {object}  map[string]string
 // @Security     BearerAuth
-// @Router       /tasks [get]
+// @Router       /api/tasks [get]
 func (h *TaskController) GetTasks(c *gin.Context) {
 	userID := getUserIDFromContext(c)
 	tasks, err := h.taskService.GetTasks(c.Request.Context(), userID)
@@ -160,7 +160,7 @@ func (h *TaskController) GetTasks(c *gin.Context) {
 // @Failure      404  {object}  map[string]string
 // @Failure      500  {object}  map[string]string
 // @Security     BearerAuth
-// @Router       /tasks/{id} [put]
+// @Router       /api/tasks/{id} [put]
 func (h *TaskController) UpdateTask(c *gin.Context) {
 	taskID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
@@ -215,7 +215,7 @@ func (h *TaskController) UpdateTask(c *gin.Context) {
 // @Failure      404  {object}  map[string]string
 // @Failure      500  {object}  map[string]string
 // @Security     BearerAuth
-// @Router       /tasks/{id} [delete]
+// @Router       /api/tasks/{id} [delete]
 func (h *TaskController) DeleteTask(c *gin.Context) {
 	taskID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {

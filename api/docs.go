@@ -24,7 +24,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/notifications": {
+        "/api/notifications": {
             "get": {
                 "security": [
                     {
@@ -91,7 +91,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/notifications/{id}/read": {
+        "/api/notifications/{id}/read": {
             "put": {
                 "security": [
                     {
@@ -170,7 +170,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/tasks": {
+        "/api/tasks": {
             "get": {
                 "security": [
                     {
@@ -301,7 +301,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/tasks/{id}": {
+        "/api/tasks/{id}": {
             "get": {
                 "security": [
                     {

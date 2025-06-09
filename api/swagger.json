@@ -18,7 +18,7 @@
     "host": "localhost:3000",
     "basePath": "/api",
     "paths": {
-        "/notifications": {
+        "/api/notifications": {
             "get": {
                 "security": [
                     {
@@ -85,7 +85,7 @@
                 }
             }
         },
-        "/notifications/{id}/read": {
+        "/api/notifications/{id}/read": {
             "put": {
                 "security": [
                     {
@@ -164,7 +164,7 @@
                 }
             }
         },
-        "/tasks": {
+        "/api/tasks": {
             "get": {
                 "security": [
                     {
@@ -295,7 +295,7 @@
                 }
             }
         },
-        "/tasks/{id}": {
+        "/api/tasks/{id}": {
             "get": {
                 "security": [
                     {

@@ -31,7 +31,7 @@ func NewNotificationController(notificationService *service.NotificationService)
 // @Failure      404  {object}  map[string]string
 // @Failure      500  {object}  map[string]string
 // @Security     BearerAuth
-// @Router       /notifications [get]
+// @Router       /api/notifications [get]
 func (h *NotificationController) GetUnreadNotifications(c *gin.Context) {
 	userID := getUserIDFromContext(c)
 	notifications, err := h.notificationService.GetUnreadNotifications(c.Request.Context(), userID)
@@ -63,7 +63,7 @@ func (h *NotificationController) GetUnreadNotifications(c *gin.Context) {
 // @Failure      404  {object}  map[string]string
 // @Failure      500  {object}  map[string]string
 // @Security     BearerAuth
-// @Router       /notifications/{id}/read [put]
+// @Router       /api/notifications/{id}/read [put]
 func (h *NotificationController) MarkAsRead(c *gin.Context) {
 	notificationID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {

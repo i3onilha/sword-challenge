@@ -102,7 +102,7 @@ info:
   title: Sword Challenge API
   version: "1.0"
 paths:
-  /notifications:
+  /api/notifications:
     get:
       consumes:
       - application/json
@@ -145,7 +145,7 @@ paths:
       summary: Get unread notifications
       tags:
       - notifications
-  /notifications/{id}/read:
+  /api/notifications/{id}/read:
     put:
       consumes:
       - application/json
@@ -196,7 +196,7 @@ paths:
       summary: Mark notification as read
       tags:
       - notifications
-  /tasks:
+  /api/tasks:
     get:
       consumes:
       - application/json
@@ -280,7 +280,7 @@ paths:
       summary: Create a new task
       tags:
       - tasks
-  /tasks/{id}:
+  /api/tasks/{id}:
     delete:
       consumes:
       - application/json
