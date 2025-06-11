@@ -183,6 +183,7 @@ func (h *TaskController) UpdateTask(c *gin.Context) {
 
 	task := &models.Task{
 		ID:          taskID,
+		Title:       req.Title,
 		Summary:     req.Summary,
 		PerformedAt: performedAt,
 	}
