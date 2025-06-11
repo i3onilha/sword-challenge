@@ -1,10 +1,8 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -22,35 +20,26 @@ func main() {
 		panic("JWT_SECRET must be at least 32 characters")
 	}
 
-	rolesFlag := flag.String("roles", "", "Comma-separated list of roles (required)")
-	flag.Parse()
-
-	if *rolesFlag == "" {
-		fmt.Println("Error: --roles flag is required")
-		flag.Usage()
-		os.Exit(1)
+	roles := map[int64]string{
+		1: "manager",
+		2: "technician",
 	}
 
-	roles := strings.Split(*rolesFlag, ",")
-	if len(roles) == 0 || (len(roles) == 1 && roles[0] == "") {
-		fmt.Println("Error: at least one role must be provided")
-		os.Exit(1)
+	for i, role := range roles {
+		claims := CustomClaims{
+			UserID: i,
+			Roles:  []string{role},
+			RegisteredClaims: jwt.RegisteredClaims{
+				ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
+				IssuedAt:  jwt.NewNumericDate(time.Now()),
+			},
+		}
+		token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+		tokenString, err := token.SignedString([]byte(secret))
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println("Role:", role)
+		fmt.Println("Bearer", tokenString)
 	}
-
-	claims := CustomClaims{
-		UserID: 1,
-		Roles:  roles,
-		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
-			IssuedAt:  jwt.NewNumericDate(time.Now()),
-		},
-	}
-
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString([]byte(secret))
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("Bearer", tokenString)
 }

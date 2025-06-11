@@ -55,7 +55,7 @@ swag:
 
 # Generate JWT token with specified roles
 jwt:
-	@go run test/auth/generate_jwt.go --roles $(roles)
+	@go run test/auth/generate_jwt.go
 
 .PHONY: deploy-all deploy-app deploy-mysql deploy-rabbitmq clean
 
