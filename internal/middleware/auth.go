@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 	"strings"
@@ -9,8 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 )
-
-var jwtSecret = []byte("your-secret-key")
 
 type CustomClaims struct {
 	UserID string   `json:"user_id"`
@@ -35,29 +32,6 @@ func (e *AuthError) Error() string {
 
 func (e *AuthError) Unwrap() error {
 	return e.Err
-}
-
-// sanitizeError removes sensitive information from error messages
-func sanitizeError(err error) error {
-	if err == nil {
-		return nil
-	}
-
-	// Convert error to string and check for sensitive patterns
-	errStr := err.Error()
-
-	// Remove any potential token information
-	if strings.Contains(errStr, "token") {
-		return fmt.Errorf("authentication error")
-	}
-
-	// Remove any potential signature information
-	if strings.Contains(errStr, "signature") {
-		return fmt.Errorf("authentication error")
-	}
-
-	// For other errors, return a generic message
-	return fmt.Errorf("authentication error")
 }
 
 // ContainsRole checks if the user has at least one required role
