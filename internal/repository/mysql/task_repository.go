@@ -21,6 +21,7 @@ func (r *taskRepository) Create(ctx context.Context, task *models.Task) error {
 		TechnicianID: task.TechnicianID,
 		Title:        task.Title,
 		Summary:      task.Summary,
+		PerformedAt:  task.PerformedAt,
 	})
 }
 
