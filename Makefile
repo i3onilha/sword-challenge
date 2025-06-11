@@ -45,7 +45,7 @@ dbdown:
 	@mysql -h mysql-service -u default -p < databases/sql/down.sql
 
 dbdump:
-	@mysqldump -h mysql-service -u root -p dbdev > databases/sql/backup/$$(date +"%Y-%m-%-d").sql
+	@mysqldump -h mysql-service -u root -p dbdev > databases/sql/mysql/backup/$$(date +"%Y-%m-%-d").sql
 
 air:
 	@clear && air
