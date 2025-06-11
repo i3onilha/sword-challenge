@@ -53,6 +53,10 @@ air:
 swag:
 	@swag init -g ./cmd/server/server.go -o api --parseDependency
 
+# Generate JWT token with specified roles
+jwt:
+	@go run test/auth/generate_jwt.go --roles $(roles)
+
 .PHONY: deploy-all deploy-app deploy-mysql deploy-rabbitmq clean
 
 # Deploy all services
