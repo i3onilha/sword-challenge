@@ -11,6 +11,7 @@ import (
 var (
 	ErrUnauthorized = errors.New("unauthorized access")
 	ErrNotFound     = errors.New("resource not found")
+	ErrInvalidInput = errors.New("invalid input")
 )
 
 type TaskService struct {
@@ -48,7 +49,7 @@ func (s *TaskService) CreateTask(ctx context.Context, task *models.Task, userID 
 
 	// Validate input
 	if err := task.Validate(); err != nil {
-		return err
+		return ErrInvalidInput
 	}
 
 	task.TechnicianID = userID

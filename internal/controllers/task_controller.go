@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -71,7 +72,10 @@ func (h *TaskController) CreateTask(c *gin.Context) {
 			c.JSON(http.StatusForbidden, gin.H{"error": "unauthorized"})
 		case service.ErrNotFound:
 			c.JSON(http.StatusNotFound, gin.H{"error": "user not found"})
+		case service.ErrInvalidInput:
+			c.JSON(http.StatusUnprocessableEntity, gin.H{"error": "invalid input"})
 		default:
+			fmt.Println(err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
 		}
 		return
