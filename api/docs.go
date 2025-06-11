@@ -177,7 +177,7 @@ const docTemplate = `{
                         "BearerAuth": []
                     }
                 ],
-                "description": "Get all tasks for the authenticated user",
+                "description": "Get all tasks for the authenticated user (if technician) or all tasks (if manager)",
                 "consumes": [
                     "application/json"
                 ],

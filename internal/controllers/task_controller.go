@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -75,7 +74,6 @@ func (h *TaskController) CreateTask(c *gin.Context) {
 		case service.ErrInvalidInput:
 			c.JSON(http.StatusUnprocessableEntity, gin.H{"error": "invalid input"})
 		default:
-			fmt.Println(err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
 		}
 		return
@@ -123,7 +121,7 @@ func (h *TaskController) GetTask(c *gin.Context) {
 }
 
 // @Summary      Get all tasks
-// @Description  Get all tasks for the authenticated user
+// @Description  Get all tasks for the authenticated user (if technician) or all tasks (if manager)
 // @Tags         tasks
 // @Accept       json
 // @Produce      json

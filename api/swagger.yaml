@@ -200,7 +200,8 @@ paths:
     get:
       consumes:
       - application/json
-      description: Get all tasks for the authenticated user
+      description: Get all tasks for the authenticated user (if technician) or all
+        tasks (if manager)
       produces:
       - application/json
       responses:
