@@ -42,3 +42,17 @@ CREATE TABLE `notifications` (
   KEY `task_id` (`task_id`),
   CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Insert some tasks for technicians
+INSERT INTO `tasks` (`technician_id`, `title`, `summary`, `performed_at`) VALUES
+(2, 'Server Maintenance', 'Regular server maintenance and updates', '2024-03-20 14:30:00'),
+(2, 'Network Configuration', 'Updated network settings for new office', '2024-03-21 09:15:00'),
+(3, 'Hardware Installation', 'Installed new workstations in Marketing', '2024-03-22 11:45:00'),
+(3, 'Software Update', 'Updated security software across all systems', '2024-03-23 16:20:00');
+
+-- Insert notifications based on the tasks
+INSERT INTO `notifications` (`task_id`, `message`, `is_read`) VALUES
+(1, 'The tech Sarah Johnson performed the task on 2024-03-20 14:30:00', 0),
+(2, 'The tech Sarah Johnson performed the task on 2024-03-21 09:15:00', 0),
+(3, 'The tech Mike Wilson performed the task on 2024-03-22 11:45:00', 0),
+(4, 'The tech Mike Wilson performed the task on 2024-03-23 16:20:00', 0); 
