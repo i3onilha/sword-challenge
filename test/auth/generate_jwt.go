@@ -9,7 +9,7 @@ import (
 )
 
 type CustomClaims struct {
-	UserID string   `json:"user_id"`
+	UserID int64    `json:"user_id"`
 	Roles  []string `json:"roles"`
 	jwt.RegisteredClaims
 }
@@ -21,7 +21,7 @@ func main() {
 	}
 
 	claims := CustomClaims{
-		UserID: "test-user-id",
+		UserID: 1,
 		Roles:  []string{"manager"}, // adjust roles as needed
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
