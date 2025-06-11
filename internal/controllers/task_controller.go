@@ -3,7 +3,6 @@ package controllers
 import (
 	"net/http"
 	"strconv"
-	"time"
 
 	"sword-challenge/internal/models"
 	"sword-challenge/internal/service"
@@ -237,16 +236,4 @@ func (h *TaskController) DeleteTask(c *gin.Context) {
 	}
 
 	c.Status(http.StatusNoContent)
-}
-
-func getUserIDFromContext(c *gin.Context) int64 {
-	userID, exists := c.Get("userID")
-	if !exists {
-		return 0
-	}
-	return userID.(int64)
-}
-
-func parseTime(timeStr string) (time.Time, error) {
-	return time.Parse(time.RFC3339, timeStr)
 }
