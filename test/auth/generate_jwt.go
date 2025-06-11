@@ -35,5 +35,5 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(tokenString)
+	fmt.Println("Bearer ", tokenString)
 }
