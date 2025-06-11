@@ -74,7 +74,7 @@ func (h *TaskController) CreateTask(c *gin.Context) {
 		case service.ErrInvalidInput:
 			c.JSON(http.StatusUnprocessableEntity, gin.H{"error": "invalid input"})
 		default:
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		}
 		return
 	}
@@ -112,7 +112,7 @@ func (h *TaskController) GetTask(c *gin.Context) {
 		case service.ErrNotFound:
 			c.JSON(http.StatusNotFound, gin.H{"error": "task not found"})
 		default:
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		}
 		return
 	}
@@ -139,7 +139,7 @@ func (h *TaskController) GetTasks(c *gin.Context) {
 		case service.ErrNotFound:
 			c.JSON(http.StatusNotFound, gin.H{"error": "user not found"})
 		default:
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		}
 		return
 	}
@@ -196,7 +196,7 @@ func (h *TaskController) UpdateTask(c *gin.Context) {
 		case service.ErrNotFound:
 			c.JSON(http.StatusNotFound, gin.H{"error": "task not found"})
 		default:
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		}
 		return
 	}
@@ -233,7 +233,7 @@ func (h *TaskController) DeleteTask(c *gin.Context) {
 		case service.ErrNotFound:
 			c.JSON(http.StatusNotFound, gin.H{"error": "task not found"})
 		default:
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		}
 		return
 	}
