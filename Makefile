@@ -39,7 +39,7 @@ sqlc:
 	@sqlc generate -f sqlc.mysql.yaml
 
 dbup:
-	@mysql -h mysql-service -u default -p < databases/sql/mysql/schema/tasks_management.sql
+	@mysql -h mysql-service -u root -p < databases/sql/mysql/up.sql
 
 dbdown:
 	@mysql -h mysql-service -u default -p < databases/sql/mysql/down.sql
