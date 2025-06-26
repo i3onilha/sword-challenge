@@ -31,8 +31,9 @@ func (r *notificationRepository) GetUnread(ctx context.Context) ([]*models.Notif
 	notifications := make([]*models.Notification, 0, len(allNotifications))
 	for _, notification := range allNotifications {
 		notifications = append(notifications, &models.Notification{
-			ID:     notification.ID,
-			TaskID: notification.TaskID,
+			ID:      notification.ID,
+			TaskID:  notification.TaskID,
+			Message: notification.Message,
 		})
 	}
 	return notifications, nil
