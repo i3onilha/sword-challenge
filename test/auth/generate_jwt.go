@@ -39,7 +39,7 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println("Role:", role)
+		fmt.Println("Role:", role, " ID:", i)
 		fmt.Println("Bearer", tokenString)
 	}
 }
