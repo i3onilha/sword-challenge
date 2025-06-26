@@ -68,7 +68,8 @@ func (s *TaskService) CreateTask(ctx context.Context, task *models.Task, userID 
 	}
 
 	// Publish task created event
-	return s.messageBroker.PublishTaskCreated(ctx, task.ID, userID, task.Title)
+	go s.messageBroker.PublishTaskCreated(ctx, task.ID, userID, task.Title)
+	return nil
 }
 
 func (s *TaskService) GetTask(ctx context.Context, taskID int64, userID int64) (*models.Task, error) {
