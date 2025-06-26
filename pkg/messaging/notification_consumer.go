@@ -50,6 +50,7 @@ func (c *NotificationConsumer) Start(ctx context.Context) error {
 
 	go func() {
 		for msg := range msgs {
+			ctx := context.Background()
 			var taskMsg struct {
 				TaskID       int64  `json:"task_id"`
 				TechnicianID int64  `json:"technician_id"`
