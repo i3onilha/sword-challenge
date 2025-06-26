@@ -42,7 +42,7 @@ func (h *NotificationController) GetUnreadNotifications(c *gin.Context) {
 		case service.ErrNotFound:
 			c.JSON(http.StatusNotFound, gin.H{"error": "user not found"})
 		default:
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		}
 		return
 	}
@@ -79,7 +79,7 @@ func (h *NotificationController) MarkAsRead(c *gin.Context) {
 		case service.ErrNotFound:
 			c.JSON(http.StatusNotFound, gin.H{"error": "notification not found"})
 		default:
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		}
 		return
 	}
