@@ -17,6 +17,7 @@ type TaskRepository interface {
 	Create(ctx context.Context, task *models.Task) error
 	GetByID(ctx context.Context, id int64) (*models.Task, error)
 	GetByTechnicianID(ctx context.Context, technicianID int64) ([]*models.Task, error)
+	GetLastInsertTask(ctx context.Context) (*models.Task, error)
 	GetAll(ctx context.Context) ([]*models.Task, error)
 	Update(ctx context.Context, task *models.Task) error
 	Delete(ctx context.Context, id int64) error

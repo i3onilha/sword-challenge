@@ -25,6 +25,22 @@ func (r *taskRepository) Create(ctx context.Context, task *models.Task) error {
 	})
 }
 
+func (r *taskRepository) GetLastInsertTask(ctx context.Context) (*models.Task, error) {
+	task, err := r.query.GetLastInsertTask(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return &models.Task{
+		ID:           task.ID,
+		TechnicianID: task.TechnicianID,
+		Title:        task.Title,
+		Summary:      task.Summary,
+		PerformedAt:  task.PerformedAt,
+		CreatedAt:    task.CreatedAt.Time,
+		UpdatedAt:    task.UpdatedAt.Time,
+	}, nil
+}
+
 func (r *taskRepository) GetByID(ctx context.Context, id int64) (*models.Task, error) {
 	task, err := r.query.GetByID(ctx, id)
 	if err != nil {

@@ -2,7 +2,10 @@
 INSERT INTO tasks (technician_id, title, summary, performed_at)
 VALUES (?, ?, ?, ?);
 
--- name: GetLastInsertID :one
+-- name: GetLastInsertTask :one
+SELECT * FROM tasks WHERE id = LAST_INSERT_ID();
+
+-- name: GetLastInsertUser :one
 SELECT * FROM users WHERE id = LAST_INSERT_ID();
 
 -- name: GetByID :one

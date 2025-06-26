@@ -130,12 +130,31 @@ func (q *Queries) GetByTechnicianID(ctx context.Context, technicianID int64) ([]
 	return items, nil
 }
 
-const getLastInsertID = `-- name: GetLastInsertID :one
+const getLastInsertTask = `-- name: GetLastInsertTask :one
+SELECT id, technician_id, title, summary, performed_at, created_at, updated_at FROM tasks WHERE id = LAST_INSERT_ID()
+`
+
+func (q *Queries) GetLastInsertTask(ctx context.Context) (Task, error) {
+	row := q.db.QueryRowContext(ctx, getLastInsertTask)
+	var i Task
+	err := row.Scan(
+		&i.ID,
+		&i.TechnicianID,
+		&i.Title,
+		&i.Summary,
+		&i.PerformedAt,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
+}
+
+const getLastInsertUser = `-- name: GetLastInsertUser :one
 SELECT id, name, email, password_hash, role, created_at, updated_at FROM users WHERE id = LAST_INSERT_ID()
 `
 
-func (q *Queries) GetLastInsertID(ctx context.Context) (User, error) {
-	row := q.db.QueryRowContext(ctx, getLastInsertID)
+func (q *Queries) GetLastInsertUser(ctx context.Context) (User, error) {
+	row := q.db.QueryRowContext(ctx, getLastInsertUser)
 	var i User
 	err := row.Scan(
 		&i.ID,

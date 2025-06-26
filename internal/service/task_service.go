@@ -62,6 +62,11 @@ func (s *TaskService) CreateTask(ctx context.Context, task *models.Task, userID 
 		return err
 	}
 
+	task, err = s.taskRepo.GetLastInsertTask(ctx)
+	if err != nil {
+		return err
+	}
+
 	// Publish task created event
 	return s.messageBroker.PublishTaskCreated(ctx, task.ID, userID, task.Title)
 }

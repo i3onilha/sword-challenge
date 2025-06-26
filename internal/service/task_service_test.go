@@ -34,6 +34,14 @@ func (m *MockTaskRepository) GetByTechnicianID(ctx context.Context, technicianID
 	return args.Get(0).([]*models.Task), args.Error(1)
 }
 
+func (m *MockTaskRepository) GetLastInsertTask(ctx context.Context) (*models.Task, error) {
+	args := m.Called(ctx)
+	if args.Get(0) == nil {
+		return nil, args.Error(1)
+	}
+	return args.Get(0).(*models.Task), args.Error(1)
+}
+
 func (m *MockTaskRepository) GetAll(ctx context.Context) ([]*models.Task, error) {
 	args := m.Called(ctx)
 	return args.Get(0).([]*models.Task), args.Error(1)
