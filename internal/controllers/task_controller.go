@@ -65,7 +65,8 @@ func (h *TaskController) CreateTask(c *gin.Context) {
 	}
 
 	userID := getUserIDFromContext(c)
-	if err := h.taskService.CreateTask(c.Request.Context(), task, userID); err != nil {
+	task, err = h.taskService.CreateTask(c.Request.Context(), task, userID)
+	if err != nil {
 		switch err {
 		case service.ErrUnauthorized:
 			c.JSON(http.StatusForbidden, gin.H{"error": "unauthorized"})

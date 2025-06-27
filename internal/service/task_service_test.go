@@ -175,7 +175,7 @@ func TestTaskService_CreateTask(t *testing.T) {
 			tt.setupMocks(mockTaskRepo, mockUserRepo, mockBroker)
 
 			service := NewTaskService(mockTaskRepo, mockUserRepo, mockBroker)
-			err := service.CreateTask(context.Background(), tt.task, tt.userID)
+			_, err := service.CreateTask(context.Background(), tt.task, tt.userID)
 
 			assert.Equal(t, tt.expectedError, err)
 			mockTaskRepo.AssertExpectations(t)

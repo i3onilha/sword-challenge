@@ -32,16 +32,16 @@ func NewTaskService(
 	}
 }
 
-func (s *TaskService) CreateTask(ctx context.Context, task *models.Task, userID int64) error {
+func (s *TaskService) CreateTask(ctx context.Context, task *models.Task, userID int64) (*models.Task, error) {
 	user, err := s.userRepo.GetByID(ctx, userID) // don't trust in user input
 	if err != nil {
-		return err
+		return nil, err
 	}
 	if user == nil {
-		return ErrNotFound
+		return nil, ErrNotFound
 	}
 	if !user.IsTechnician() {
-		return ErrUnauthorized
+		return nil, ErrUnauthorized
 	}
 
 	// Sanitize input
@@ -49,7 +49,7 @@ func (s *TaskService) CreateTask(ctx context.Context, task *models.Task, userID 
 
 	// Validate input
 	if err := task.Validate(); err != nil {
-		return ErrInvalidInput
+		return nil, ErrInvalidInput
 	}
 
 	task.TechnicianID = userID
@@ -59,17 +59,17 @@ func (s *TaskService) CreateTask(ctx context.Context, task *models.Task, userID 
 		Summary:      task.Summary,
 		PerformedAt:  task.PerformedAt,
 	}); err != nil {
-		return err
+		return nil, err
 	}
 
 	task, err = s.taskRepo.GetLastInsertTask(ctx)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// Publish task created event
 	go s.messageBroker.PublishTaskCreated(ctx, task.ID, userID, task.Title)
-	return nil
+	return task, nil
 }
 
 func (s *TaskService) GetTask(ctx context.Context, taskID int64, userID int64) (*models.Task, error) {
