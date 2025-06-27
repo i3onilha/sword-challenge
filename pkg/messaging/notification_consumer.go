@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"time"
 
 	"sword-challenge/internal/models"
 	"sword-challenge/internal/repository"
@@ -76,6 +77,7 @@ func (c *NotificationConsumer) Start(ctx context.Context) error {
 				ID:           taskMsg.TaskID,
 				TechnicianID: taskMsg.TechnicianID,
 				Title:        taskMsg.Title,
+				PerformedAt:  time.Now(),
 			}
 			notification, err := models.NewTaskNotification(task, technician)
 			if err != nil {
